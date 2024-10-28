@@ -11,6 +11,8 @@ export const AuthProvider = ({ children }) => {
         setUser(null); // Reset user state
         // Optionally, remove token from local storage if you store it there
         localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('username');
         navigate("/")
     };
 

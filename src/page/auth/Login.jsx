@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../../service/APIFunction';
 import { useAuth } from '../../service/AuthContext';
 import ForgotPasswordModal from '../../components/forgot/ForgotPasswordModal';
+import { Alert } from 'react-bootstrap';
 
 const Login = () => {
     const { setUser } = useAuth(); // Get the setUser function
@@ -12,6 +13,7 @@ const Login = () => {
     });
     const [message, setMessage] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    const [alertVariant, setAlertVariant] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -25,10 +27,12 @@ const Login = () => {
         
         if (result.success) {
             setUser(result.data); // Set user data in context
+            setAlertVariant('success');
             // Navigate to the home page or perform other actions
             navigate('/');
         } else {
             setMessage(result.message); // Show the error message
+            setAlertVariant('danger');
         }
     };
     const toggleModal = () => {
@@ -78,7 +82,7 @@ const Login = () => {
                                             <a href="#!" className="text-white"><i className="fab fa-google fa-lg" /></a>
                                         </div>
                                     </form>
-                                    {message && <p>{message}</p>}
+                                    {message && <Alert variant={alertVariant}>{message}</Alert>}
                                     <div>
                                         <p className="mb-0">
                                             Don't have an account?{" "}

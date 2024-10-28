@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
 import Header from '../components/header/Header';
-import Carousel from '../components/carousel/carousel';
 import Spinner from '../components/spinner/Spinner';
 import Footer from '../components/footer/Footer';
 import Home from '../page/home/Home';
@@ -16,6 +15,12 @@ import Contact from '../page/contact/contact';
 import Login from '../page/auth/Login';
 import SignUp from '../page/auth/SignUp';
 import { AuthProvider } from '../service/AuthContext';
+import JobPostPage from '../components/job/JobTable';
+import InterviewUpdateComponent from '../components/job/UpdateJob';
+import PasswordChangeForm from '../components/changePassword/ChangePasswordForm';
+import AdminDashBoard from '../page/admin/AdminDashBoard';
+import AddPositionForm from '../components/positions/AddPositionForm';
+import InterviewDetail from '../page/admin/InterviewDetail';
 
 
 const ClientRouter = () => {
@@ -40,15 +45,21 @@ const ClientRouter = () => {
                         <Header />
                         <Routes>
                             <Route path='/' element={<Home />} />
+                            <Route path='/post-job' element={<JobPostPage />} />
+                            <Route path='/add-position/:interviewId' element={<AddPositionForm />} />
+                            <Route path='/change-password' element={<PasswordChangeForm />} />
+                            <Route path='/update-job/:interviewId' element={<InterviewUpdateComponent />} />
                             <Route path='/about' element={<About />} />
                             <Route path='/list-job' element={<ListJobs />} />
-                            <Route path='/job-detail' element={<JobDetail />} />
+                            <Route path='/job-detail/:interviewId' element={<JobDetail />} />
                             <Route path='/category' element={<Category />} />
                             <Route path='/testimonial' element={<FeedBack />} />
                             <Route path='/404' element={<Error />} />
                             <Route path='/contact' element={<Contact />} />
                             <Route path='/login' element={<Login />} />
                             <Route path='/sign-up' element={<SignUp />} />
+                            <Route path='/dash-board' element={<AdminDashBoard />} />
+                            <Route path="/interview/:interviewId" component={<InterviewDetail/>} />
                         </Routes>
                         <Footer />
                     </AuthProvider>
